@@ -8,7 +8,7 @@ public class ThreeSum {
      */
     public static int is3SumExist(Integer[] a) {
         //todo: sort the array //O(nlogn)
-        Integer[] sorted = a;
+        Integer[] sorted = new SelectionSort().on(a);
 
         int counter = 0;
 
