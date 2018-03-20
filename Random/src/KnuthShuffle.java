@@ -1,7 +1,6 @@
 // Aria Pahlavan on March 16 2018
 
 import java.util.Random;
-import java.util.SortedMap;
 
 public class KnuthShuffle {
     public static <T> T[] shuffle(Comparable<T>[] a) {
