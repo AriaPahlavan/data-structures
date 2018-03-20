@@ -1,6 +1,11 @@
 // Aria Pahlavan on March 19 2018
 
+import java.util.LinkedList;
+
 public class Graph {
+    private final int V;
+    private final LinkedList<Integer>[] adj;
+    private int E;
 
     /**
      * Create an empty graph with {@code V} vertices
@@ -8,15 +13,28 @@ public class Graph {
      * @param V number of vertices in the graph
      */
     public Graph(int V) {
+        this.V = V;
+        this.E = 0;
+        this.adj = (LinkedList<Integer>[]) new LinkedList[V];
+
+        for (int i = 0; i < V; i++)
+            adj[i] = new LinkedList<>();
     }
 
     /**
      * Create an empty graph with {@code V} vertices
      *
-     * @param V number of vertices in the graph
+     * @param V     number of vertices in the graph
      * @param edges list of edges in the graph
      */
     public Graph(int V, Pair<Integer, Integer>[] edges) {
+        this(V);
+
+        for (Pair<Integer, Integer> edge : edges) {
+            adj[edge.first()].add(edge.second());
+            adj[edge.second()].add(edge.first());
+            E++;
+        }
     }
 
     /**
@@ -24,9 +42,13 @@ public class Graph {
      *
      * @param u incident from vertex {@code u}
      * @param v incident to vertex {@code v}
+     * @apiNote parallel edges are allowed
      */
     public void addEdge(int u, int v) {
-
+        //todo disallow parallel edges
+        adj[u].add(v);
+        adj[v].add(u);
+        E++;
     }
 
     /**
@@ -34,21 +56,21 @@ public class Graph {
      * @return vertices adjacent to {@code v}
      */
     public Iterable<Integer> adjOf(int v) {
-        return null;
+        return adj[v];
     }
 
     /**
      * @return number of vertices in the graph
      */
     public int V() {
-        return 0;
+        return V;
     }
 
     /**
      * @return number of edged in the graph
      */
     public int E() {
-        return 0;
+        return E;
     }
 
     /**
@@ -88,7 +110,7 @@ public class Graph {
             for (Integer u : adjOf(v))
                 if (v == u) count++;
 
-        return count/2; //each edge is considered twice
+        return count / 2; //each edge is considered twice
     }
 
     @Override
