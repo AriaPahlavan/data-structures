@@ -35,8 +35,9 @@ public class GraphTest {
 
         Graph g = new Graph(V, edges);
 
-        for (int v = 0; v < g.V(); v++)
-            for (Integer u : g.adjOf(v))
-                System.out.println(v + "-" + u);
+//        for (int v = 0; v < g.V(); v++)
+//            for (Integer u : g.adjOf(v))
+//                System.out.println(v + "-" + u);
+        System.out.println(g.toString());
     }
 }

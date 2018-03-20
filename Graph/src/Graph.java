@@ -1,6 +1,9 @@
 // Aria Pahlavan on March 19 2018
 
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Graph {
     private final int V;
@@ -115,6 +118,17 @@ public class Graph {
 
     @Override
     public String toString() {
-        return "Graph{}";
+        String adjListStr = IntStream.range(0, V)
+                 .mapToObj(i -> "\t\t(" + i + ')'
+                                + adj[i].stream()
+                                        .map(v -> "->"+v)
+                                        .reduce(String::concat).orElse("") + '\n')
+                 .reduce(String::concat).orElse("[NO ADJACENCY LIST]");
+
+        return "Graph{" +
+               "\n\tV=" + V +
+               ", \n\tE=" + E +
+               ", \n\tadj=\n" + adjListStr +
+               '}';
     }
 }
