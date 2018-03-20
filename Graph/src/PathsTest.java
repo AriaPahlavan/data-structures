@@ -2,7 +2,7 @@
 
 import org.junit.*;
 
-public class DepthFirstPathsTest {
+public class PathsTest {
     @Before
     public void setUp() throws Exception {
     }
@@ -33,14 +33,18 @@ public class DepthFirstPathsTest {
 
         Graph g = new Graph(V, edges);
 
-        int s = 0;
-        DepthFirstPaths dfsPaths = new DepthFirstPaths(g, s);
+        int s = 11;
+        Paths dfsPaths = new DepthFirstPaths(g, s);
+        Paths bfsPaths = new BreadthFirstPaths(g, s);
 
         for (int v = 0; v < g.V(); v++)
             if (dfsPaths.hasPathTo(v)) {
 //                System.out.println(v); //print out all connected vertices to s
                 dfsPaths.pathTo(v).forEach(x -> System.out.print("("+x+")->"));
                 System.out.println("("+ s +")");
+                bfsPaths.pathTo(v).forEach(x -> System.out.print("("+x+")->"));
+                System.out.println("("+ s +")");
+                System.out.println("-------");
             }
 
     }
