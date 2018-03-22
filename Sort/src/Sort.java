@@ -1,7 +1,7 @@
 // Aria Pahlavan on March 16 2018
 
 public interface Sort {
-    public <T> T[] on(Comparable<T>[] a);
+    public <T> T[] on(Comparable[] a);
 
 
     public default boolean less(Comparable p, Comparable q) {

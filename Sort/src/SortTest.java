@@ -3,10 +3,10 @@ import org.junit.Before;
 import static org.junit.Assert.*;
 
 public class SortTest {
-    Character[] a;
-    Integer[] i;
-    Double[] d;
-    Sort sorter;
+    private Character[] a;
+    private Integer[] i;
+    private Double[] d;
+    private Sort sorter;
 
     @Before
     public void setUp() {

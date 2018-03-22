@@ -2,7 +2,7 @@
 
 public class SelectionSort implements Sort {
     @Override
-    public <T> T[] on(Comparable<T>[] a) {
+    public <T> T[] on(Comparable[] a) {
         for (int i = 0; i < a.length; i++) {
             int min = i;
 
