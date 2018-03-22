@@ -1,7 +1,5 @@
 // Aria Pahlavan on March 21 2018
 
-import java.util.PriorityQueue;
-
 public class FractionalKnapsack {
     /**
      * Greedily solve fractional knapsack problem
