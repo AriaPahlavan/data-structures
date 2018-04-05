@@ -1,42 +1,50 @@
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class PathCount {
+public class PathCountIterative {
     private Long[][] memo;
     private long[][] grid;
     private int ROW_LEN, COL_LEN;
 
-    public PathCount(long[][] grid) {
+    public PathCountIterative(long[][] grid) {
         this.ROW_LEN = grid.length;
         this.COL_LEN = grid[0].length;
         this.grid = grid;
         this.memo = new Long[ROW_LEN][COL_LEN];
+        this.memo[ROW_LEN - 1][COL_LEN - 1] = 1L;
     }
 
-    public PathCount(long[][] grid, int row, int col) {
-        this.ROW_LEN = grid.length;
-        this.COL_LEN = grid[0].length;
-        this.grid = grid;
-        this.memo = new Long[ROW_LEN][COL_LEN];
-
+    public PathCountIterative(long[][] grid, int row, int col) {
+        this(grid);
         PathsFrom(row, col);
     }
 
     public long PathsFrom(int row, int col) {
-        if (!IsValidGrid(row, col)) return 0;
-        if (row == (ROW_LEN - 1) && col == (COL_LEN - 1)) return 1;
+        for (int i = ROW_LEN - 1; i >= row; i--) {
+            for (int j = COL_LEN - 1; j >= col; j--) {
+                if (grid[i][j] < 0)
+                    continue;
 
-        return memo[row][col] == null
-                ? memo[row][col] = PathsFrom(row + 1, col) + PathsFrom(row, col + 1)
-                : memo[row][col];
+                memo[i][j] = memo[i][j] == null ? compute(i, j) : memo[i][j];
+            }
+        }
+
+        return memo[row][col];
+    }
+
+    private Long compute(int row, int col) {
+        final long toRight = IsValidGrid(row, col + 1) ? memo[row][col + 1] : 0;
+        final long toBottom = IsValidGrid(row + 1, col) ? memo[row + 1][col] : 0;
+
+        return toRight + toBottom;
     }
 
     private Long[][] getResult() { return memo; }
 
     private boolean IsValidGrid(int row, int col) {
         return grid != null
-               && row < ROW_LEN
-               && col < COL_LEN
+               && 0 <= row && row < ROW_LEN
+               && 0 <= col && col < COL_LEN
                && grid[row][col] >= 0;
     }
 
@@ -60,19 +68,18 @@ public class PathCount {
 
         for (long[] row : grid) {
             for (long elem : row) {
-                System.out.print((elem == -1 ? "#" : elem) + "\t");
+                System.out.print((elem == -1 ? "◼" : "☐") + "\t");
             }
             System.out.println();
         }
 
         System.out.println("-------------------------------");
 
-        for (Long[] row : new PathCount(grid,0,0).getResult()) {
+        for (Long[] row : new PathCountIterative(grid, 0, 0).getResult()) {
             for (Long elem : row) {
 
-                System.out.print((elem == null ? "#" : elem) + "\t");
+                System.out.print((elem == null ? "◼" : elem) + "\t");
             }
-            System.out.println();
             System.out.println();
         }
     }
