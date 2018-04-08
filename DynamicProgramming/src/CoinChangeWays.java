@@ -1,7 +1,16 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class CoinChangeRecursive {
+public class CoinChangeWays {
+
+    /**
+     * Find number of ways to money to coin change
+     *
+     * @param coins array of coin options
+     * @param money total money to change
+     * @return number of ways change can be made
+     * @apiNote recursive memoized dynamic programming method
+     */
     public static long of(long[] coins, long money) {
         return of(coins, money, 0, new HashMap<>());
     }
@@ -27,6 +36,6 @@ public class CoinChangeRecursive {
     }
 
     public static void main(String[] args) {
-        System.out.println(CoinChangeRecursive.of(new long[]{50, 25, 10}, 50));
+        System.out.println(CoinChangeWays.of(new long[]{50, 25, 10}, 50));
     }
 }

@@ -6,6 +6,12 @@ public class PathCountIterative {
     private long[][] grid;
     private int ROW_LEN, COL_LEN;
 
+    /**
+     * Find path count from a source to destination in the {@code grid}
+     *
+     * @param grid initial grid
+     * @apiNote bottom-up dynamic programming method
+     */
     public PathCountIterative(long[][] grid) {
         this.ROW_LEN = grid.length;
         this.COL_LEN = grid[0].length;
@@ -14,7 +20,7 @@ public class PathCountIterative {
         this.memo[ROW_LEN - 1][COL_LEN - 1] = 1L;
     }
 
-    public PathCountIterative(long[][] grid, int row, int col) {
+    private PathCountIterative(long[][] grid, int row, int col) {
         this(grid);
         PathsFrom(row, col);
     }

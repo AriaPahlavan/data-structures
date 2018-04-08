@@ -6,6 +6,12 @@ public class PathCountRecursive {
     private long[][] grid;
     private int ROW_LEN, COL_LEN;
 
+    /**
+     * Find path count from a source to destination in the {@code grid}
+     *
+     * @param grid initial grid
+     * @apiNote recursive memoized method
+     */
     public PathCountRecursive(long[][] grid) {
         this.ROW_LEN = grid.length;
         this.COL_LEN = grid[0].length;

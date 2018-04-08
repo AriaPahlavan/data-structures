@@ -21,6 +21,16 @@ public class CountAddUpSets {
         return result;
      }
 
+     private static long dp(long[] possibilities, long total) {
+        Map<String, Long> memo = new HashMap<>();
+
+        if (total == 0) return 1;
+        if (total < 0)  return 0;
+
+        //TODO: finish implementation of iterative algorithm
+        return 0;
+     }
+
     public static void main(String[] args) {
         if (of(new long[]{1, 2, 4, 6, 10, 5, 16}, 16) != 5)
             System.err.println("FAIL");
